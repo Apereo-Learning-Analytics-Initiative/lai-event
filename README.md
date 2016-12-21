@@ -1,2 +1,2 @@
-# lai-model
-Apereo LAI components shared data model
+# lai-event
+Apereo LAI components shared event data model
