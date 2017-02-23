@@ -56,11 +56,11 @@ public class Entity implements Serializable {
   
   private Entity assignable;
   private Agent actor;
-  private double normalScore;
-  private double penaltyScore;
-  private double totalScore;
-  private double extraCreditScore;
-  private double curvedTotalScore;
+  private Double normalScore;
+  private Double penaltyScore;
+  private Double totalScore;
+  private Double extraCreditScore;
+  private Double curvedTotalScore;
   private String curveFactor; 
   private String comment;
   private Agent scoredBy;
@@ -438,27 +438,27 @@ public class Entity implements Serializable {
       return this;
     }
     
-    public Builder withNormalScore(double normalScore) {
+    public Builder withNormalScore(Double normalScore) {
       _entity.normalScore = normalScore;
       return this;
     }
     
-    public Builder withPenaltyScore(double penaltyScore) {
+    public Builder withPenaltyScore(Double penaltyScore) {
       _entity.penaltyScore = penaltyScore;
       return this;
     }
     
-    public Builder withTotalScore(double totalScore) {
+    public Builder withTotalScore(Double totalScore) {
       _entity.totalScore = totalScore;
       return this;
     }
     
-    public Builder withExtraCreditScore(double extraCreditScore) {
+    public Builder withExtraCreditScore(Double extraCreditScore) {
       _entity.extraCreditScore = extraCreditScore;
       return this;
     }
     
-    public Builder withCurvedTotalScore(double curvedTotalScore) {
+    public Builder withCurvedTotalScore(Double curvedTotalScore) {
       _entity.curvedTotalScore = curvedTotalScore;
       return this;
     }

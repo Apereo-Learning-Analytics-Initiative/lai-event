@@ -114,7 +114,7 @@ public class Envelope implements Serializable {
       if (_envelope.data == null || _envelope.data.isEmpty()
           || StringUtils.isBlank(_envelope.sensor) 
           || _envelope.sendTime == null) {
-        throw new IllegalStateException();
+        throw new IllegalStateException(_envelope.toString());
       }
       return _envelope;
     }
