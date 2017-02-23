@@ -187,29 +187,23 @@ public class Entity implements Serializable {
     result = prime * result + ((context == null) ? 0 : context.hashCode());
     result = prime * result + ((currentTime == null) ? 0 : currentTime.hashCode());
     result = prime * result + ((curveFactor == null) ? 0 : curveFactor.hashCode());
-    long temp;
-    temp = Double.doubleToLongBits(curvedTotalScore);
-    result = prime * result + (int) (temp ^ (temp >>> 32));
+    result = prime * result + ((curvedTotalScore == null) ? 0 : curvedTotalScore.hashCode());
     result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
     result = prime * result + ((dateModified == null) ? 0 : dateModified.hashCode());
     result = prime * result + ((datePublished == null) ? 0 : datePublished.hashCode());
     result = prime * result + ((description == null) ? 0 : description.hashCode());
     result = prime * result + ((duration == null) ? 0 : duration.hashCode());
     result = prime * result + ((extensions == null) ? 0 : extensions.hashCode());
-    temp = Double.doubleToLongBits(extraCreditScore);
-    result = prime * result + (int) (temp ^ (temp >>> 32));
+    result = prime * result + ((extraCreditScore == null) ? 0 : extraCreditScore.hashCode());
     result = prime * result + ((id == null) ? 0 : id.hashCode());
     result = prime * result + ((isPartOf == null) ? 0 : isPartOf.hashCode());
     result = prime * result + ((keywords == null) ? 0 : keywords.hashCode());
     result = prime * result + ((name == null) ? 0 : name.hashCode());
-    temp = Double.doubleToLongBits(normalScore);
-    result = prime * result + (int) (temp ^ (temp >>> 32));
+    result = prime * result + ((normalScore == null) ? 0 : normalScore.hashCode());
     result = prime * result + ((objectType == null) ? 0 : objectType.hashCode());
-    temp = Double.doubleToLongBits(penaltyScore);
-    result = prime * result + (int) (temp ^ (temp >>> 32));
+    result = prime * result + ((penaltyScore == null) ? 0 : penaltyScore.hashCode());
     result = prime * result + ((scoredBy == null) ? 0 : scoredBy.hashCode());
-    temp = Double.doubleToLongBits(totalScore);
-    result = prime * result + (int) (temp ^ (temp >>> 32));
+    result = prime * result + ((totalScore == null) ? 0 : totalScore.hashCode());
     result = prime * result + ((type == null) ? 0 : type.hashCode());
     result = prime * result + ((version == null) ? 0 : version.hashCode());
     return result;
@@ -259,7 +253,10 @@ public class Entity implements Serializable {
         return false;
     } else if (!curveFactor.equals(other.curveFactor))
       return false;
-    if (Double.doubleToLongBits(curvedTotalScore) != Double.doubleToLongBits(other.curvedTotalScore))
+    if (curvedTotalScore == null) {
+      if (other.curvedTotalScore != null)
+        return false;
+    } else if (!curvedTotalScore.equals(other.curvedTotalScore))
       return false;
     if (dateCreated == null) {
       if (other.dateCreated != null)
@@ -291,7 +288,10 @@ public class Entity implements Serializable {
         return false;
     } else if (!extensions.equals(other.extensions))
       return false;
-    if (Double.doubleToLongBits(extraCreditScore) != Double.doubleToLongBits(other.extraCreditScore))
+    if (extraCreditScore == null) {
+      if (other.extraCreditScore != null)
+        return false;
+    } else if (!extraCreditScore.equals(other.extraCreditScore))
       return false;
     if (id == null) {
       if (other.id != null)
@@ -313,21 +313,30 @@ public class Entity implements Serializable {
         return false;
     } else if (!name.equals(other.name))
       return false;
-    if (Double.doubleToLongBits(normalScore) != Double.doubleToLongBits(other.normalScore))
+    if (normalScore == null) {
+      if (other.normalScore != null)
+        return false;
+    } else if (!normalScore.equals(other.normalScore))
       return false;
     if (objectType == null) {
       if (other.objectType != null)
         return false;
     } else if (!objectType.equals(other.objectType))
       return false;
-    if (Double.doubleToLongBits(penaltyScore) != Double.doubleToLongBits(other.penaltyScore))
+    if (penaltyScore == null) {
+      if (other.penaltyScore != null)
+        return false;
+    } else if (!penaltyScore.equals(other.penaltyScore))
       return false;
     if (scoredBy == null) {
       if (other.scoredBy != null)
         return false;
     } else if (!scoredBy.equals(other.scoredBy))
       return false;
-    if (Double.doubleToLongBits(totalScore) != Double.doubleToLongBits(other.totalScore))
+    if (totalScore == null) {
+      if (other.totalScore != null)
+        return false;
+    } else if (!totalScore.equals(other.totalScore))
       return false;
     if (type == null) {
       if (other.type != null)
