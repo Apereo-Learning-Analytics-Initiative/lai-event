@@ -45,6 +45,8 @@ public class Group implements Serializable {
   private LocalDateTime dateModified;
   
   private SubOrganizationOf subOrganizationOf;
+  
+  private String courseNumber;
 
   private Group() {}
 
@@ -84,6 +86,10 @@ public class Group implements Serializable {
     return subOrganizationOf;
   }
 
+  public String getCourseNumber() {
+    return courseNumber;
+  }
+
   @Override
   public String toString() {
     return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
@@ -94,6 +100,7 @@ public class Group implements Serializable {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((context == null) ? 0 : context.hashCode());
+    result = prime * result + ((courseNumber == null) ? 0 : courseNumber.hashCode());
     result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
     result = prime * result + ((dateModified == null) ? 0 : dateModified.hashCode());
     result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -118,6 +125,11 @@ public class Group implements Serializable {
       if (other.context != null)
         return false;
     } else if (!context.equals(other.context))
+      return false;
+    if (courseNumber == null) {
+      if (other.courseNumber != null)
+        return false;
+    } else if (!courseNumber.equals(other.courseNumber))
       return false;
     if (dateCreated == null) {
       if (other.dateCreated != null)
@@ -210,6 +222,11 @@ public class Group implements Serializable {
     
     public Builder withSubOrganizationOf(SubOrganizationOf subOrganizationOf) {
       _group.subOrganizationOf = subOrganizationOf;
+      return this;
+    }
+    
+    public Builder withCourseNumber(String courseNumber) {
+      _group.courseNumber = courseNumber;
       return this;
     }
     
