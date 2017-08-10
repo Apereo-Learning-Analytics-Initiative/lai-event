@@ -54,8 +54,8 @@ public class Entity implements Serializable {
   private String duration;
   private String currentTime;
   
-  private Entity assignable;
-  private Agent actor;
+  private String assignable;
+  private String actor;
   private Double normalScore;
   private Double penaltyScore;
   private Double totalScore;
@@ -131,11 +131,11 @@ public class Entity implements Serializable {
     return currentTime;
   }
 
-  public Entity getAssignable() {
+  public String getAssignable() {
     return assignable;
   }
 
-  public Agent getActor() {
+  public String getActor() {
     return actor;
   }
 
@@ -437,12 +437,12 @@ public class Entity implements Serializable {
       return this;
     }
     
-    public Builder withAssignable(Entity assignable) {
+    public Builder withAssignable(String assignable) {
       _entity.assignable = assignable;
       return this;
     }
     
-    public Builder withActor(Agent actor) {
+    public Builder withActor(String actor) {
       _entity.actor = actor;
       return this;
     }

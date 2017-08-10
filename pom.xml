@@ -5,7 +5,7 @@
 
   <groupId>apereo</groupId>
   <artifactId>lai-event</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <packaging>jar</packaging>
 
   <name>apereo-lai-event</name>
