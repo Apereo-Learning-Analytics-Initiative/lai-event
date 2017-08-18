@@ -191,6 +191,18 @@ public class Group implements Serializable {
       return this;
     }
     
+    @JsonProperty("id")
+    public Builder withV11Id(String id) {
+      _group.id = id;
+      return this;
+    }
+    
+    @JsonProperty("type")
+    public Builder withV11Type(String type) {
+      _group.type = type;
+      return this;
+    }
+    
     @JsonProperty("@context")
     public Builder withContext(String context) {
       _group.context = context;

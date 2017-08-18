@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @author ggilbert
  *
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonDeserialize(builder = Membership.Builder.class)
 public class Membership implements Serializable {
@@ -206,6 +208,18 @@ public class Membership implements Serializable {
     
     @JsonProperty("@type")
     public Builder withType(String type) {
+      _membership.type = type;
+      return this;
+    }
+    
+    @JsonProperty("id")
+    public Builder withV11Id(String id) {
+      _membership.id = id;
+      return this;
+    }
+    
+    @JsonProperty("type")
+    public Builder withV11Type(String type) {
       _membership.type = type;
       return this;
     }
