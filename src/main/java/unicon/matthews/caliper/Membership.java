@@ -1,10 +1,7 @@
-/**
- * 
- */
 package unicon.matthews.caliper;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +16,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+
 /**
  * @author ggilbert
- *
+ * @author xchopin <xavier.chopin@univ-lorraine.fr>
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -43,8 +41,8 @@ public class Membership implements Serializable {
   private String name;
   private String description;
   private Map<String, String> extensions;
-  private LocalDateTime dateCreated;
-  private LocalDateTime dateModified;
+  private Instant dateCreated;
+  private Instant dateModified;
   
   private String member;
   private String organization;
@@ -77,11 +75,11 @@ public class Membership implements Serializable {
     return extensions;
   }
 
-  public LocalDateTime getDateCreated() {
+  public Instant getDateCreated() {
     return dateCreated;
   }
 
-  public LocalDateTime getDateModified() {
+  public Instant getDateModified() {
     return dateModified;
   }
 
@@ -245,12 +243,12 @@ public class Membership implements Serializable {
       return this;
     }
     
-    public Builder withDateCreated(LocalDateTime dateCreated) {
+    public Builder withDateCreated(Instant dateCreated) {
       _membership.dateCreated = dateCreated;
       return this;
     }
     
-    public Builder withDateModified(LocalDateTime dataModified) {
+    public Builder withDateModified(Instant dataModified) {
       _membership.dateModified = dataModified;
       return this;
     }

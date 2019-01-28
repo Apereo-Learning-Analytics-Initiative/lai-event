@@ -1,10 +1,7 @@
-/**
- * 
- */
 package unicon.matthews.caliper;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import javax.validation.constraints.NotNull;
 
@@ -19,7 +16,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * @author ggilbert
- *
+ * @author xchopin <xavier.chopin@univ-lorraine.fr>
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -49,7 +46,7 @@ public class Event implements Serializable {
   private Entity generated;
   private Group group;
   private Membership membership;
-  private LocalDateTime eventTime;
+  private Instant eventTime;
   private String federatedSession;
   
   private Event() {}
@@ -102,7 +99,7 @@ public class Event implements Serializable {
     return federatedSession;
   }
 
-  public LocalDateTime getEventTime() {
+  public Instant getEventTime() {
     return eventTime;
   }
   
@@ -275,7 +272,7 @@ public class Event implements Serializable {
       return this;
     }
     
-    public Builder withEventTime(LocalDateTime eventTime) {
+    public Builder withEventTime(Instant eventTime) {
       _basicEvent.eventTime = eventTime;
       return this;
     }

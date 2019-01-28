@@ -1,10 +1,7 @@
-/**
- * 
- */
 package unicon.matthews.caliper;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +16,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+
 /**
  * @author ggilbert
- *
+ * @author xchopin <xavier.chopin@univ-lorraine.fr>
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -43,14 +41,14 @@ public class Entity implements Serializable {
   private String name;
   private String description;
   private Map<String, String> extensions;
-  private LocalDateTime dateCreated;
-  private LocalDateTime dateModified;
+  private Instant dateCreated;
+  private Instant dateModified;
   
   private List<String> objectType;
   private List<LearningObject> alignedLearningObjective;
   private List<String> keywords;
   private Entity isPartOf;
-  private LocalDateTime datePublished;
+  private Instant datePublished;
   private String version;
   private String duration;
   private String currentTime;
@@ -92,11 +90,11 @@ public class Entity implements Serializable {
     return extensions;
   }
 
-  public LocalDateTime getDateCreated() {
+  public Instant getDateCreated() {
     return dateCreated;
   }
 
-  public LocalDateTime getDateModified() {
+  public Instant getDateModified() {
     return dateModified;
   }
   
@@ -116,7 +114,7 @@ public class Entity implements Serializable {
     return isPartOf;
   }
 
-  public LocalDateTime getDatePublished() {
+  public Instant getDatePublished() {
     return datePublished;
   }
   
@@ -400,12 +398,12 @@ public class Entity implements Serializable {
       return this;
     }
     
-    public Builder withDateCreated(LocalDateTime dateCreated) {
+    public Builder withDateCreated(Instant dateCreated) {
       _entity.dateCreated = dateCreated;
       return this;
     }
     
-    public Builder withDateModified(LocalDateTime dataModified) {
+    public Builder withDateModified(Instant dataModified) {
       _entity.dateModified = dataModified;
       return this;
     }
@@ -430,7 +428,7 @@ public class Entity implements Serializable {
       return this;
     }
     
-    public Builder withDatePublished(LocalDateTime datePublished) {
+    public Builder withDatePublished(Instant datePublished) {
       _entity.datePublished = datePublished;
       return this;
     }

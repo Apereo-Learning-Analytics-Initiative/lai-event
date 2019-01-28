@@ -1,6 +1,3 @@
-/**
- * 
- */
 package unicon.matthews.caliper;
 
 import java.util.Map;
@@ -8,9 +5,10 @@ import java.util.Map;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+
 /**
  * @author ggilbert
- *
+ * @author xchopin <xavier.chopin@univ-lorraine.fr>
  */
 public class ClassEventStatistics {
   private String classSourcedId;

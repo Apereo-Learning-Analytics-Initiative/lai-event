@@ -1,10 +1,7 @@
-/**
- * 
- */
 package unicon.matthews.caliper;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -17,9 +14,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+
 /**
  * @author ggilbert
- *
+ * @author xchopin <xavier.chopin@univ-lorraine.fr>
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -31,7 +29,7 @@ public class Envelope implements Serializable {
   private String sensor;
   
   @NotNull
-  private LocalDateTime sendTime;
+  private Instant sendTime;
   
   @NotNull
   private List<Event> data;
@@ -42,7 +40,7 @@ public class Envelope implements Serializable {
     return sensor;
   }
 
-  public LocalDateTime getSendTime() {
+  public Instant getSendTime() {
     return sendTime;
   }
 
@@ -100,7 +98,7 @@ public class Envelope implements Serializable {
       return this;
     }
     
-    public Builder withSendTime(LocalDateTime sendTime) {
+    public Builder withSendTime(Instant sendTime) {
       _envelope.sendTime = sendTime;
       return this;
     }
