@@ -13,32 +13,12 @@
  * permissions and limitations under the License.
  *
  */
-package unicon.matthews.xapi;
-
-import java.util.List;
+package org.apereo.openlrw.xapi;
 
 /**
  * @author ggilbert
  *
  */
-public class StatementResult {
-	
-	private List<Statement> statements;
-	
-	public StatementResult(List<Statement> statements) {
-		this.statements = statements;
-	}
-
-	public List<Statement> getStatements() {
-		return statements;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "StatementResult [statements=" + statements + "]";
-	}
-
+public enum XApiActorTypes {
+	Agent,Group
 }

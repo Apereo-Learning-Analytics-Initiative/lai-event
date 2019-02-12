@@ -13,12 +13,12 @@
  * permissions and limitations under the License.
  *
  */
-package unicon.matthews.xapi;
+package org.apereo.openlrw.xapi;
 
 /**
  * @author ggilbert
  *
  */
-public enum XApiActorTypes {
-	Agent,Group
+public enum XApiObjectTypes {
+	Activity,Agent,Group,SubStatement,StatementRef
 }

@@ -1,7 +1,8 @@
-package unicon.matthews.caliper;
+package org.apereo.openlrw.caliper;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.constraints.NotNull;
@@ -15,15 +16,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-/*
+
+/**
  * @author ggilbert
  * @author xchopin <xavier.chopin@univ-lorraine.fr>
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonDeserialize(builder = LearningObject.Builder.class)
-public class LearningObject implements Serializable {
-
+@JsonDeserialize(builder = Membership.Builder.class)
+public class Membership implements Serializable {
   private static final long serialVersionUID = 1L;
   
   @NotNull
@@ -42,8 +43,13 @@ public class LearningObject implements Serializable {
   private Map<String, String> extensions;
   private Instant dateCreated;
   private Instant dateModified;
+  
+  private String member;
+  private String organization;
+  private List<String> roles;
+  private String status;
 
-  private LearningObject() {}
+  private Membership() {}
 
   public String getId() {
     return id;
@@ -77,6 +83,22 @@ public class LearningObject implements Serializable {
     return dateModified;
   }
 
+  public String getMember() {
+    return member;
+  }
+
+  public String getOrganization() {
+    return organization;
+  }
+
+  public List<String> getRoles() {
+    return roles;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
   @Override
   public String toString() {
     return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
@@ -92,7 +114,11 @@ public class LearningObject implements Serializable {
     result = prime * result + ((description == null) ? 0 : description.hashCode());
     result = prime * result + ((extensions == null) ? 0 : extensions.hashCode());
     result = prime * result + ((id == null) ? 0 : id.hashCode());
+    result = prime * result + ((member == null) ? 0 : member.hashCode());
     result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = prime * result + ((organization == null) ? 0 : organization.hashCode());
+    result = prime * result + ((roles == null) ? 0 : roles.hashCode());
+    result = prime * result + ((status == null) ? 0 : status.hashCode());
     result = prime * result + ((type == null) ? 0 : type.hashCode());
     return result;
   }
@@ -105,7 +131,7 @@ public class LearningObject implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    LearningObject other = (LearningObject) obj;
+    Membership other = (Membership) obj;
     if (context == null) {
       if (other.context != null)
         return false;
@@ -136,10 +162,30 @@ public class LearningObject implements Serializable {
         return false;
     } else if (!id.equals(other.id))
       return false;
+    if (member == null) {
+      if (other.member != null)
+        return false;
+    } else if (!member.equals(other.member))
+      return false;
     if (name == null) {
       if (other.name != null)
         return false;
     } else if (!name.equals(other.name))
+      return false;
+    if (organization == null) {
+      if (other.organization != null)
+        return false;
+    } else if (!organization.equals(other.organization))
+      return false;
+    if (roles == null) {
+      if (other.roles != null)
+        return false;
+    } else if (!roles.equals(other.roles))
+      return false;
+    if (status == null) {
+      if (other.status != null)
+        return false;
+    } else if (!status.equals(other.status))
       return false;
     if (type == null) {
       if (other.type != null)
@@ -150,70 +196,90 @@ public class LearningObject implements Serializable {
   }
 
   public static class Builder {
-    private LearningObject _learningObject = new LearningObject();
+    private Membership _membership = new Membership();
     
     @JsonProperty("@id")
     public Builder withId(String id) {
-      _learningObject.id = id;
+      _membership.id = id;
       return this;
     }
     
     @JsonProperty("@type")
     public Builder withType(String type) {
-      _learningObject.type = type;
+      _membership.type = type;
       return this;
     }
     
     @JsonProperty("id")
     public Builder withV11Id(String id) {
-      _learningObject.id = id;
+      _membership.id = id;
       return this;
     }
     
     @JsonProperty("type")
-    public Builder withv11Type(String type) {
-      _learningObject.type = type;
+    public Builder withV11Type(String type) {
+      _membership.type = type;
       return this;
     }
     
     @JsonProperty("@context")
     public Builder withContext(String context) {
-      _learningObject.context = context;
+      _membership.context = context;
       return this;
     }
     
     public Builder withName(String name) {
-      _learningObject.name = name;
+      _membership.name = name;
       return this;
     }
     
     public Builder withDescription(String description) {
-      _learningObject.description = description;
+      _membership.description = description;
       return this;
     }
     
     public Builder withExtensions(Map<String,String> extensions) {
-      _learningObject.extensions = extensions;
+      _membership.extensions = extensions;
       return this;
     }
     
     public Builder withDateCreated(Instant dateCreated) {
-      _learningObject.dateCreated = dateCreated;
+      _membership.dateCreated = dateCreated;
       return this;
     }
     
     public Builder withDateModified(Instant dataModified) {
-      _learningObject.dateModified = dataModified;
+      _membership.dateModified = dataModified;
       return this;
     }
     
-    public LearningObject build() {
-      if (StringUtils.isBlank(_learningObject.id) 
-          || StringUtils.isBlank(_learningObject.type)) {
-        throw new IllegalStateException(_learningObject.toString());
+    public Builder withMember(String member) {
+      _membership.member = member;
+      return this;
+    }
+    
+    public Builder withOrganization(String organization) {
+      _membership.organization = organization;
+      return this;
+    }
+    
+    public Builder withRoles(List<String> roles) {
+      _membership.roles = roles;
+      return this;
+    }
+    
+    public Builder withStatus(String status) {
+      _membership.status = status;
+      return this;
+    }
+    
+    public Membership build() {
+      if (StringUtils.isBlank(_membership.id) 
+          || StringUtils.isBlank(_membership.type)) {
+        throw new IllegalStateException(_membership.toString());
       }
       
-      return _learningObject;
+      return _membership;
     }
   }
 

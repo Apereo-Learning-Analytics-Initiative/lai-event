@@ -1,4 +1,4 @@
-package unicon.matthews.xapi;
+package org.apereo.openlrw.xapi;
 
 import javax.validation.constraints.NotNull;
 

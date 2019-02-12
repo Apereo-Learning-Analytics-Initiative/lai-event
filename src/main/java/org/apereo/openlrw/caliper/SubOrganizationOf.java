@@ -1,4 +1,4 @@
-package unicon.matthews.caliper;
+package org.apereo.openlrw.caliper;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -22,8 +22,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonDeserialize(builder = Group.Builder.class)
-public class Group implements Serializable {
+@JsonDeserialize(builder = SubOrganizationOf.Builder.class)
+public class SubOrganizationOf implements Serializable {
 
   private static final long serialVersionUID = 1L;
   
@@ -40,15 +40,15 @@ public class Group implements Serializable {
   
   private String name;
   private String description;
+  private SubOrganizationOf subOrganizationOf;
+  private String category;
+  private String academicSession;
+  private String courseNumber;
   private Map<String, String> extensions;
   private Instant dateCreated;
   private Instant dateModified;
-  
-  private SubOrganizationOf subOrganizationOf;
-  
-  private String courseNumber;
 
-  private Group() {}
+  private SubOrganizationOf() {}
 
   public String getId() {
     return id;
@@ -70,6 +70,22 @@ public class Group implements Serializable {
     return description;
   }
 
+  public SubOrganizationOf getSubOrganizationOf() {
+    return subOrganizationOf;
+  }
+
+  public String getCategory() {
+    return category;
+  }
+
+  public String getAcademicSession() {
+    return academicSession;
+  }
+
+  public String getCourseNumber() {
+    return courseNumber;
+  }
+
   public Map<String, String> getExtensions() {
     return extensions;
   }
@@ -82,14 +98,6 @@ public class Group implements Serializable {
     return dateModified;
   }
 
-  public SubOrganizationOf getSubOrganizationOf() {
-    return subOrganizationOf;
-  }
-
-  public String getCourseNumber() {
-    return courseNumber;
-  }
-
   @Override
   public String toString() {
     return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
@@ -99,6 +107,8 @@ public class Group implements Serializable {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((academicSession == null) ? 0 : academicSession.hashCode());
+    result = prime * result + ((category == null) ? 0 : category.hashCode());
     result = prime * result + ((context == null) ? 0 : context.hashCode());
     result = prime * result + ((courseNumber == null) ? 0 : courseNumber.hashCode());
     result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
@@ -120,7 +130,17 @@ public class Group implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Group other = (Group) obj;
+    SubOrganizationOf other = (SubOrganizationOf) obj;
+    if (academicSession == null) {
+      if (other.academicSession != null)
+        return false;
+    } else if (!academicSession.equals(other.academicSession))
+      return false;
+    if (category == null) {
+      if (other.category != null)
+        return false;
+    } else if (!category.equals(other.category))
+      return false;
     if (context == null) {
       if (other.context != null)
         return false;
@@ -175,80 +195,90 @@ public class Group implements Serializable {
   }
 
   public static class Builder {
-    private Group _group = new Group();
+    private SubOrganizationOf _subOrganizationOf = new SubOrganizationOf();
     
     @JsonProperty("@id")
     public Builder withId(String id) {
-      _group.id = id;
+      _subOrganizationOf.id = id;
       return this;
     }
     
     @JsonProperty("@type")
     public Builder withType(String type) {
-      _group.type = type;
+      _subOrganizationOf.type = type;
       return this;
     }
     
     @JsonProperty("id")
     public Builder withV11Id(String id) {
-      _group.id = id;
+      _subOrganizationOf.id = id;
       return this;
     }
     
     @JsonProperty("type")
     public Builder withV11Type(String type) {
-      _group.type = type;
+      _subOrganizationOf.type = type;
       return this;
     }
     
     @JsonProperty("@context")
     public Builder withContext(String context) {
-      _group.context = context;
+      _subOrganizationOf.context = context;
       return this;
     }
     
     public Builder withName(String name) {
-      _group.name = name;
+      _subOrganizationOf.name = name;
       return this;
     }
     
     public Builder withDescription(String description) {
-      _group.description = description;
+      _subOrganizationOf.description = description;
       return this;
     }
     
     public Builder withExtensions(Map<String,String> extensions) {
-      _group.extensions = extensions;
+      _subOrganizationOf.extensions = extensions;
       return this;
     }
     
     public Builder withDateCreated(Instant dateCreated) {
-      _group.dateCreated = dateCreated;
+      _subOrganizationOf.dateCreated = dateCreated;
       return this;
     }
     
     public Builder withDateModified(Instant dataModified) {
-      _group.dateModified = dataModified;
+      _subOrganizationOf.dateModified = dataModified;
       return this;
     }
     
-    public Builder withSubOrganizationOf(SubOrganizationOf subOrganizationOf) {
-      _group.subOrganizationOf = subOrganizationOf;
+    public Builder withAcademicSession(String academicSession) {
+      _subOrganizationOf.academicSession = academicSession;
       return this;
     }
     
     public Builder withCourseNumber(String courseNumber) {
-      _group.courseNumber = courseNumber;
+      _subOrganizationOf.courseNumber = courseNumber;
       return this;
     }
     
-    public Group build() {
-      if (StringUtils.isBlank(_group.id) 
-          || StringUtils.isBlank(_group.type)) {
-        throw new IllegalStateException(_group.toString());
+    public Builder withCategory(String category) {
+      _subOrganizationOf.category = category;
+      return this;
+    }
+    
+    public Builder withSubOrganizationOf(SubOrganizationOf subOrganizationOf) {
+      _subOrganizationOf.subOrganizationOf = subOrganizationOf;
+      return this;
+    }
+    
+    public SubOrganizationOf build() {
+      if (StringUtils.isBlank(_subOrganizationOf.id) 
+          || StringUtils.isBlank(_subOrganizationOf.type)) {
+        throw new IllegalStateException(_subOrganizationOf.toString());
       }
       
-      return _group;
+      return _subOrganizationOf;
     }
   }
 

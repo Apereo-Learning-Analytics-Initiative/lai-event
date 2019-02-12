@@ -1,4 +1,4 @@
-package unicon.matthews.xapi;
+package org.apereo.openlrw.xapi;
 
 import java.util.Map;
 

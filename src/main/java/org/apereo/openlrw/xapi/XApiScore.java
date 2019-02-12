@@ -13,8 +13,7 @@
  * permissions and limitations under the License.
  *
  */
-package unicon.matthews.xapi;
-
+package org.apereo.openlrw.xapi;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -24,39 +23,58 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 @JsonInclude(Include.NON_NULL)
-public class XApiAccount {
-	private String homePage;
-	private String name;
+public class XApiScore {
+	private Double scaled;
+	private Double raw;
+	private Double min;
+	private Double max;
 	
 	/**
-	 * @return the homePage
+	 * @return the scaled
 	 */
-	public String getHomePage() {
-		return homePage;
+	public Double getScaled() {
+		return scaled;
 	}
 	/**
-	 * @param homePage the homePage to set
+	 * @param scaled the scaled to set
 	 */
-	public void setHomePage(String homePage) {
-		this.homePage = homePage;
+	public void setScaled(Double scaled) {
+		this.scaled = scaled;
 	}
 	/**
-	 * @return the name
+	 * @return the raw
 	 */
-	public String getName() {
-		return name;
+	public Double getRaw() {
+		return raw;
 	}
 	/**
-	 * @param name the name to set
+	 * @param raw the raw to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setRaw(Double raw) {
+		this.raw = raw;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * @return the min
 	 */
-	@Override
-	public String toString() {
-		return "LRSAccount [homePage=" + homePage + ", name=" + name + "]";
+	public Double getMin() {
+		return min;
+	}
+	/**
+	 * @param min the min to set
+	 */
+	public void setMin(Double min) {
+		this.min = min;
+	}
+	/**
+	 * @return the max
+	 */
+	public Double getMax() {
+		return max;
+	}
+	/**
+	 * @param max the max to set
+	 */
+	public void setMax(Double max) {
+		this.max = max;
 	}
 }

@@ -13,7 +13,9 @@
  * permissions and limitations under the License.
  *
  */
-package unicon.matthews.xapi;
+package org.apereo.openlrw.xapi;
+
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -23,58 +25,31 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 @JsonInclude(Include.NON_NULL)
-public class XApiScore {
-	private Double scaled;
-	private Double raw;
-	private Double min;
-	private Double max;
-	
+public class XApiStatementRef {
+	@NotNull(message="statementref.objectType can't be null") private XApiObjectTypes objectType = XApiObjectTypes.StatementRef;
+	@NotNull(message="statementref.id can't be null") private String id;
 	/**
-	 * @return the scaled
+	 * @return the objectType
 	 */
-	public Double getScaled() {
-		return scaled;
+	public XApiObjectTypes getObjectType() {
+		return objectType;
 	}
 	/**
-	 * @param scaled the scaled to set
+	 * @param objectType the objectType to set
 	 */
-	public void setScaled(Double scaled) {
-		this.scaled = scaled;
+	public void setObjectType(XApiObjectTypes objectType) {
+		this.objectType = objectType;
 	}
 	/**
-	 * @return the raw
+	 * @return the id
 	 */
-	public Double getRaw() {
-		return raw;
+	public String getId() {
+		return id;
 	}
 	/**
-	 * @param raw the raw to set
+	 * @param id the id to set
 	 */
-	public void setRaw(Double raw) {
-		this.raw = raw;
-	}
-	/**
-	 * @return the min
-	 */
-	public Double getMin() {
-		return min;
-	}
-	/**
-	 * @param min the min to set
-	 */
-	public void setMin(Double min) {
-		this.min = min;
-	}
-	/**
-	 * @return the max
-	 */
-	public Double getMax() {
-		return max;
-	}
-	/**
-	 * @param max the max to set
-	 */
-	public void setMax(Double max) {
-		this.max = max;
+	public void setId(String id) {
+		this.id = id;
 	}
 }

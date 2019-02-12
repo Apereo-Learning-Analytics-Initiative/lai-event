@@ -13,9 +13,8 @@
  * permissions and limitations under the License.
  *
  */
-package unicon.matthews.xapi;
+package org.apereo.openlrw.xapi;
 
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -25,31 +24,39 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 @JsonInclude(Include.NON_NULL)
-public class XApiStatementRef {
-	@NotNull(message="statementref.objectType can't be null") private XApiObjectTypes objectType = XApiObjectTypes.StatementRef;
-	@NotNull(message="statementref.id can't be null") private String id;
+public class XApiAccount {
+	private String homePage;
+	private String name;
+	
 	/**
-	 * @return the objectType
+	 * @return the homePage
 	 */
-	public XApiObjectTypes getObjectType() {
-		return objectType;
+	public String getHomePage() {
+		return homePage;
 	}
 	/**
-	 * @param objectType the objectType to set
+	 * @param homePage the homePage to set
 	 */
-	public void setObjectType(XApiObjectTypes objectType) {
-		this.objectType = objectType;
+	public void setHomePage(String homePage) {
+		this.homePage = homePage;
 	}
 	/**
-	 * @return the id
+	 * @return the name
 	 */
-	public String getId() {
-		return id;
+	public String getName() {
+		return name;
 	}
 	/**
-	 * @param id the id to set
+	 * @param name the name to set
 	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setName(String name) {
+		this.name = name;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "LRSAccount [homePage=" + homePage + ", name=" + name + "]";
 	}
 }
