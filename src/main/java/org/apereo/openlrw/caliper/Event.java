@@ -30,7 +30,49 @@ public class Event implements Serializable {
   private String context;
   @JsonProperty("@type")
   private String type;
-  
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Event event = (Event) o;
+
+    if (timeZoneOffset != event.timeZoneOffset) return false;
+    if (id != null ? !id.equals(event.id) : event.id != null) return false;
+    if (context != null ? !context.equals(event.context) : event.context != null) return false;
+    if (type != null ? !type.equals(event.type) : event.type != null) return false;
+    if (agent != null ? !agent.equals(event.agent) : event.agent != null) return false;
+    if (action != null ? !action.equals(event.action) : event.action != null) return false;
+    if (object != null ? !object.equals(event.object) : event.object != null) return false;
+    if (target != null ? !target.equals(event.target) : event.target != null) return false;
+    if (edApp != null ? !edApp.equals(event.edApp) : event.edApp != null) return false;
+    if (generated != null ? !generated.equals(event.generated) : event.generated != null) return false;
+    if (group != null ? !group.equals(event.group) : event.group != null) return false;
+    if (membership != null ? !membership.equals(event.membership) : event.membership != null) return false;
+    if (eventTime != null ? !eventTime.equals(event.eventTime) : event.eventTime != null) return false;
+    return federatedSession != null ? federatedSession.equals(event.federatedSession) : event.federatedSession == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = id != null ? id.hashCode() : 0;
+    result = 31 * result + (context != null ? context.hashCode() : 0);
+    result = 31 * result + (type != null ? type.hashCode() : 0);
+    result = 31 * result + (agent != null ? agent.hashCode() : 0);
+    result = 31 * result + (action != null ? action.hashCode() : 0);
+    result = 31 * result + (object != null ? object.hashCode() : 0);
+    result = 31 * result + (target != null ? target.hashCode() : 0);
+    result = 31 * result + (edApp != null ? edApp.hashCode() : 0);
+    result = 31 * result + (generated != null ? generated.hashCode() : 0);
+    result = 31 * result + (group != null ? group.hashCode() : 0);
+    result = 31 * result + (membership != null ? membership.hashCode() : 0);
+    result = 31 * result + (eventTime != null ? eventTime.hashCode() : 0);
+    result = 31 * result + (int) (timeZoneOffset ^ (timeZoneOffset >>> 32));
+    result = 31 * result + (federatedSession != null ? federatedSession.hashCode() : 0);
+    return result;
+  }
+
   @NotNull
   @JsonProperty("actor")
   private Agent agent;
@@ -47,6 +89,7 @@ public class Event implements Serializable {
   private Group group;
   private Membership membership;
   private Instant eventTime;
+  private long timeZoneOffset;
   private String federatedSession;
   
   private Event() {}
@@ -102,108 +145,20 @@ public class Event implements Serializable {
   public Instant getEventTime() {
     return eventTime;
   }
+
+  public long getTimeZoneOffset() {
+    return timeZoneOffset;
+  }
+
+  public void setTimeZoneOffset(long timeZoneOffset) {
+    this.timeZoneOffset = timeZoneOffset;
+  }
   
   @Override
   public String toString() {
     return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((action == null) ? 0 : action.hashCode());
-    result = prime * result + ((agent == null) ? 0 : agent.hashCode());
-    result = prime * result + ((context == null) ? 0 : context.hashCode());
-    result = prime * result + ((edApp == null) ? 0 : edApp.hashCode());
-    result = prime * result + ((eventTime == null) ? 0 : eventTime.hashCode());
-    result = prime * result + ((federatedSession == null) ? 0 : federatedSession.hashCode());
-    result = prime * result + ((generated == null) ? 0 : generated.hashCode());
-    result = prime * result + ((group == null) ? 0 : group.hashCode());
-    result = prime * result + ((id == null) ? 0 : id.hashCode());
-    result = prime * result + ((membership == null) ? 0 : membership.hashCode());
-    result = prime * result + ((object == null) ? 0 : object.hashCode());
-    result = prime * result + ((target == null) ? 0 : target.hashCode());
-    result = prime * result + ((type == null) ? 0 : type.hashCode());
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    Event other = (Event) obj;
-    if (action == null) {
-      if (other.action != null)
-        return false;
-    } else if (!action.equals(other.action))
-      return false;
-    if (agent == null) {
-      if (other.agent != null)
-        return false;
-    } else if (!agent.equals(other.agent))
-      return false;
-    if (context == null) {
-      if (other.context != null)
-        return false;
-    } else if (!context.equals(other.context))
-      return false;
-    if (edApp == null) {
-      if (other.edApp != null)
-        return false;
-    } else if (!edApp.equals(other.edApp))
-      return false;
-    if (eventTime == null) {
-      if (other.eventTime != null)
-        return false;
-    } else if (!eventTime.equals(other.eventTime))
-      return false;
-    if (federatedSession == null) {
-      if (other.federatedSession != null)
-        return false;
-    } else if (!federatedSession.equals(other.federatedSession))
-      return false;
-    if (generated == null) {
-      if (other.generated != null)
-        return false;
-    } else if (!generated.equals(other.generated))
-      return false;
-    if (group == null) {
-      if (other.group != null)
-        return false;
-    } else if (!group.equals(other.group))
-      return false;
-    if (id == null) {
-      if (other.id != null)
-        return false;
-    } else if (!id.equals(other.id))
-      return false;
-    if (membership == null) {
-      if (other.membership != null)
-        return false;
-    } else if (!membership.equals(other.membership))
-      return false;
-    if (object == null) {
-      if (other.object != null)
-        return false;
-    } else if (!object.equals(other.object))
-      return false;
-    if (target == null) {
-      if (other.target != null)
-        return false;
-    } else if (!target.equals(other.target))
-      return false;
-    if (type == null) {
-      if (other.type != null)
-        return false;
-    } else if (!type.equals(other.type))
-      return false;
-    return true;
-  }
 
   public static class Builder {
     Event _basicEvent = new Event();
@@ -281,14 +236,18 @@ public class Event implements Serializable {
       _basicEvent.federatedSession = federatedSession;
       return this;
     }
+
+    public Builder withTimeZoneOffset(long timeZoneOffset) {
+      _basicEvent.timeZoneOffset = timeZoneOffset;
+      return this;
+    }
     
     public Event build() {
       
-      if (_basicEvent.agent == null 
-          || StringUtils.isBlank(_basicEvent.action)
+      if (_basicEvent.agent == null || StringUtils.isBlank(_basicEvent.action)
           || _basicEvent.object == null
           || _basicEvent.eventTime == null) {
-        throw new IllegalStateException(_basicEvent.toString());
+        throw new IllegalStateException("Agent, Action, Object and EventTime must be filled with a value.");
       }
       
       return _basicEvent;
