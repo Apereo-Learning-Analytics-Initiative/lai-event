@@ -1,6 +1,5 @@
 package org.apereo.openlrw.caliper;
 
-import java.io.Serializable;
 import java.time.Instant;
 
 import javax.validation.constraints.NotNull;
@@ -21,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonDeserialize(builder = Event.Builder.class)
-public class Event implements Serializable {
+public class Event implements Caliper1p0Event {
   private static final long serialVersionUID = 1L;
   
   private String id;

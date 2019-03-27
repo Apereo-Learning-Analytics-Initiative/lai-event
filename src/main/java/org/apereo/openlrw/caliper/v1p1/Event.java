@@ -1,6 +1,5 @@
 package org.apereo.openlrw.caliper.v1p1;
 
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.Map;
 
@@ -8,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class Event implements Serializable {
+public class Event implements Caliper1p1Event {
 
   private static final long serialVersionUID = 1L;
   
