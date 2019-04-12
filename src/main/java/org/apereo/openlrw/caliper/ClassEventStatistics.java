@@ -5,7 +5,6 @@ import java.util.Map;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-
 /**
  * @author ggilbert
  * @author xchopin <xavier.chopin@univ-lorraine.fr>
@@ -15,16 +14,27 @@ public class ClassEventStatistics {
   private Map<String, String> metadata;
   private Integer totalEvents;
   private Integer totalStudentEnrollments;
-  //private Integer totalStudentWithEvents;//TODO
   private Map<String, Long> eventCountGroupedByDate;
-  private Map<String, Map<String, Long>> eventCountGroupedByDateAndStudent;
+  private Map<String, Map<String, Long>> eventCountGroupedByDateAndStudent;  
+  private Integer studentsWithEvents;
+  private Map<String, Long> eventTypeTotals;
+  private Map<String,Double> eventTypeAverages;
+
   
   private ClassEventStatistics() {}
   
+  public Integer getStudentsWithEvents() {
+    return studentsWithEvents;
+  }
+  public Map<String, Long> getEventTypeTotals() {
+    return eventTypeTotals;
+  }
+  public Map<String, Double> getEventTypeAverages() {
+    return eventTypeAverages;
+  }
   public Integer getMeanStudentEvents() {
 	  return totalEvents/totalStudentEnrollments;
   }
-
 	public String getClassSourcedId() {
     return classSourcedId;
   }
@@ -40,7 +50,6 @@ public class ClassEventStatistics {
   public Map<String, Long> getEventCountGroupedByDate() {
     return eventCountGroupedByDate;
   }
-  
   public Map<String, Map<String, Long>> getEventCountGroupedByDateAndStudent() {
     return eventCountGroupedByDateAndStudent;
   }
@@ -137,7 +146,20 @@ public class ClassEventStatistics {
     public Builder withEventCountGroupedByDateAndStudent(Map<String, Map<String, Long>> eventCountGroupedByDateAndStudent) {
       _classEventStatistics.eventCountGroupedByDateAndStudent = eventCountGroupedByDateAndStudent;
       return this;
-    }      
+    }
+
+    public Builder withStudentsWithEvents(Integer studentsWithEvents) {
+      _classEventStatistics.studentsWithEvents = studentsWithEvents;
+      return this;
+    }  
+    public Builder withEventTypeTotals(Map<String, Long> eventTypeTotals) {
+      _classEventStatistics.eventTypeTotals = eventTypeTotals;
+      return this;
+    }  
+    public Builder withEventTypeAverages(Map<String, Double> eventTypeAverages) {
+      _classEventStatistics.eventTypeAverages = eventTypeAverages;
+      return this;
+    }
     
     public ClassEventStatistics build() {
       return _classEventStatistics;
