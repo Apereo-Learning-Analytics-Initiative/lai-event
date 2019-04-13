@@ -5,7 +5,6 @@ import java.util.Map;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-
 /**
  * @author ggilbert
  * @author xchopin <xavier.chopin@univ-lorraine.fr>
@@ -16,11 +15,27 @@ public class ClassEventStatistics {
   private Integer totalEvents;
   private Integer totalStudentEnrollments;
   private Map<String, Long> eventCountGroupedByDate;
-  private Map<String, Map<String, Long>> eventCountGroupedByDateAndStudent;
+  private Map<String, Map<String, Long>> eventCountGroupedByDateAndStudent;  
+  private Integer studentsWithEvents;
+  private Map<String, Long> eventTypeTotals;
+  private Map<String,Double> eventTypeAverages;
+
   
   private ClassEventStatistics() {}
   
-  public String getClassSourcedId() {
+  public Integer getStudentsWithEvents() {
+    return studentsWithEvents;
+  }
+  public Map<String, Long> getEventTypeTotals() {
+    return eventTypeTotals;
+  }
+  public Map<String, Double> getEventTypeAverages() {
+    return eventTypeAverages;
+  }
+  public Integer getMeanStudentEvents() {
+	  return totalEvents/totalStudentEnrollments;
+  }
+	public String getClassSourcedId() {
     return classSourcedId;
   }
   public Map<String, String> getMetadata() {
@@ -35,7 +50,6 @@ public class ClassEventStatistics {
   public Map<String, Long> getEventCountGroupedByDate() {
     return eventCountGroupedByDate;
   }
-  
   public Map<String, Map<String, Long>> getEventCountGroupedByDateAndStudent() {
     return eventCountGroupedByDateAndStudent;
   }
@@ -54,7 +68,7 @@ public class ClassEventStatistics {
     result = prime * result + ((eventCountGroupedByDateAndStudent == null) ? 0 : eventCountGroupedByDateAndStudent.hashCode());
     result = prime * result + ((metadata == null) ? 0 : metadata.hashCode());
     result = prime * result + ((totalEvents == null) ? 0 : totalEvents.hashCode());
-    result = prime * result + ((totalStudentEnrollments == null) ? 0 : totalStudentEnrollments.hashCode());
+    result = prime * result + ((totalStudentEnrollments == null) ? 0 : totalStudentEnrollments.hashCode());    
     return result;
   }
 
@@ -97,6 +111,7 @@ public class ClassEventStatistics {
         return false;
     } else if (!totalStudentEnrollments.equals(other.totalStudentEnrollments))
       return false;
+    
     return true;
   }
 
@@ -130,6 +145,19 @@ public class ClassEventStatistics {
     
     public Builder withEventCountGroupedByDateAndStudent(Map<String, Map<String, Long>> eventCountGroupedByDateAndStudent) {
       _classEventStatistics.eventCountGroupedByDateAndStudent = eventCountGroupedByDateAndStudent;
+      return this;
+    }
+
+    public Builder withStudentsWithEvents(Integer studentsWithEvents) {
+      _classEventStatistics.studentsWithEvents = studentsWithEvents;
+      return this;
+    }  
+    public Builder withEventTypeTotals(Map<String, Long> eventTypeTotals) {
+      _classEventStatistics.eventTypeTotals = eventTypeTotals;
+      return this;
+    }  
+    public Builder withEventTypeAverages(Map<String, Double> eventTypeAverages) {
+      _classEventStatistics.eventTypeAverages = eventTypeAverages;
       return this;
     }
     
