@@ -14,57 +14,64 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-/**
- * @author ggilbert
- *
- */
+
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonDeserialize(builder = DigitalResource.Builder.class)
-public class DigitalResource extends Entity {
+public class AssignableDigitalResource extends DigitalResource {
 
   private static final long serialVersionUID = 1L;
-
  
-  protected List<Agent> creators;
-  protected String mediaType;
-  protected List<String> keywords;
-  protected List<LearningObjective> learningObjectives;
-  protected Entity isPartOf;
-  protected Instant datePublished;
-  protected String version;
+  protected Instant dateToActivate;
+  protected Instant dateToShow;
+  protected Instant dateToStartOn;
+  protected Instant dateToSubmit;
+  private int maxAttempts;
+  private int maxSubmits;
+  private int maxScore;
   
-  public List<Agent> getCreators() {
-    return creators;
-  }
-  public String getMediaType() {
-    return mediaType;
-  }
-  public List<String> getKeywords() {
-    return keywords;
-  }
-  public List<LearningObjective> getLearningObjectives() {
-    return learningObjectives;
-  }
-  public Entity getIsPartOf() {
-    return isPartOf;
-  }
-  public Instant getDatePublished() {
-    return datePublished;
-  }
-  public String getVersion() {
-    return version;
+   
+  public Instant getDateToActivate() {
+        return dateToActivate;
   }
 
-  // For Frame 
-  private Integer index;
-  public Integer getIndex() {
-      return index;
+  public Instant getDateToShow() {
+        return dateToShow;
+  }
+  public Instant getDateToStartOn() {
+        return dateToStartOn;
+  }
+  public Instant getDateToSubmit() {
+        return dateToSubmit;
   }
 
-    
+  public int getMaxAttempts() {
+    return maxAttempts;
+  }
+  public int getSubmits() {
+    return maxSubmits;
+  }
+  public int getScore() {
+    return maxScore;
+  }
+
+  // For Assessment
+  protected List<AssignableDigitalResource> items;
+  
+  public List<AssignableDigitalResource> getItems() {
+    return items;
+  }
+
+  // For AssessmentItem
+  protected Boolean isTimeDependent;
+  
+  public Boolean getIsTimeDependent() {
+    return isTimeDependent;
+  }
+ 
+  
   public static class Builder {
-    DigitalResource _digitalresource = new DigitalResource();
+    AssignableDigitalResource _digitalresource = new AssignableDigitalResource();
 
     @JsonProperty("@context")
     public Builder withContext(String context) {
@@ -127,7 +134,7 @@ public class DigitalResource extends Entity {
       _digitalresource.isPartOf = isPartOf;
       return this;
     }
-   
+    
     public Builder withDatePublished(Instant datePublished) {
       _digitalresource.datePublished = datePublished;
       return this;
@@ -137,13 +144,51 @@ public class DigitalResource extends Entity {
       return this;
     }
 
-    public Builder withIndex(Integer index) {
-      _digitalresource.index = index;
+    public Builder withDateToActivate(Instant dateToActivate) {
+      _digitalresource.dateToActivate = dateToActivate;
+      return this;
+    }
+    public Builder withDateToShow(Instant dateToShow) {
+      _digitalresource.dateToShow = dateToShow;
+      return this;
+    }
+    public Builder withDateToStartOn(Instant dateToStartOn) {
+      _digitalresource.dateToStartOn = dateToStartOn;
+      return this;
+    }
+    
+    public Builder withDateToSubmit(Instant dateToSubmit) {
+      _digitalresource.dateToSubmit = dateToSubmit;
       return this;
     }
 
-        
-    public DigitalResource build() {
+   public Builder withMaxScore(int maxScore) {
+      _digitalresource.maxScore = maxScore;
+      return this;
+    }
+
+    public Builder withMaxAttempts(int maxAttempts) {
+      _digitalresource.maxAttempts = maxAttempts;
+      return this;
+    }
+
+    public Builder withMaxSubmits(int maxSubmits) {
+      _digitalresource.maxSubmits = maxSubmits;
+      return this;
+    }
+
+    public Builder withItems(List<AssignableDigitalResource> items) {
+      _digitalresource.items = items;
+      return this;
+    }
+
+    public Builder withIsTimeDependent(Boolean isTimeDependent) {
+      _digitalresource.isTimeDependent = isTimeDependent;
+      return this;
+    }
+   
+    
+    public AssignableDigitalResource build() {
       if (StringUtils.isBlank(_digitalresource.id) 
           || StringUtils.isBlank(_digitalresource.type)) {
         throw new IllegalStateException(_digitalresource.toString());

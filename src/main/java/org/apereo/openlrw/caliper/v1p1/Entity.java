@@ -15,7 +15,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 /**
  * @author ggilbert
@@ -24,9 +28,60 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonDeserialize(builder = Entity.Builder.class)
+@JsonTypeInfo(
+  use = JsonTypeInfo.Id.NAME, 
+  include = JsonTypeInfo.As.PROPERTY, 
+  property = "type",
+  visible = true)
+@JsonSubTypes({ 
+  @Type(value = Entity.class, name = "Entity"), 
+  @Type(value = DigitalResource.class, name = "DigitalResource"), 
+  @Type(value = DigitalResource.class, name = "Chapter"), 
+  @Type(value = DigitalResource.class, name = "Document"), 
+  @Type(value = DigitalResource.class, name = "Frame"), 
+  @Type(value = DigitalResource.class, name = "Page"),
+  @Type(value = DigitalResource.class, name = "WebPage"),
+  @Type(value = DigitalResourceCollection.class, name = "DigitalResourceCollection"),  
+  @Type(value = DigitalResourceCollection.class, name = "Forum"),  
+  @Type(value = DigitalResourceCollection.class, name = "Thread"),
+  @Type(value = Message.class, name = "Message"),
+  @Type(value = AssignableDigitalResource.class, name = "AssignableDigitalResourse"), 
+  @Type(value = AssignableDigitalResource.class, name = "Assessment"), 
+  @Type(value = AssignableDigitalResource.class, name = "AssessmentItem"), 
+  @Type(value = Attempt.class, name = "Attempt"), 
+  @Type(value = MediaObject.class, name = "MediaObject"),
+  @Type(value = MediaObject.class, name = "VideoObject"),
+  @Type(value = MediaObject.class, name = "AudioObject"),
+  @Type(value = MediaObject.class, name = "ImageObject"),
+  @Type(value = MediaLocation.class, name = "MediaLocation"),
+  @Type(value = Agent.class, name = "Agent"), 
+  @Type(value = Person.class, name = "Person"), 
+  @Type(value = Organization.class, name = "Organization"),
+  @Type(value = Organization.class, name = "Group"),
+  @Type(value = Organization.class, name = "CourseOffering"),
+  @Type(value = Organization.class, name = "CourseSection"),
+  @Type(value = Annotation.class, name = "Annotation"), 
+  @Type(value = Annotation.class, name = "BookmarkAnnotation"), 
+  @Type(value = Annotation.class, name = "HighlightAnnotation"), 
+  @Type(value = Annotation.class, name = "SharedAnnotation"),  
+  @Type(value = Annotation.class, name = "TagAnnotation"),  
+  @Type(value = Response.class, name = "Response"), 
+  @Type(value = Response.class, name = "FillinBlankResponse"), 
+  @Type(value = Response.class, name = "MultipleChoiceResponse"), 
+  @Type(value = Response.class, name = "MultipleResponseResponse"), 
+  @Type(value = Response.class, name = "SelectTextResponse"), 
+  @Type(value = Response.class, name = "TrueFalseResponse"), 
+  @Type(value = Score.class, name = "Score"), 
+  @Type(value = Result.class, name = "Result"), 
+ 
+})
 public class Entity implements Serializable {
 
   private static final long serialVersionUID = 1L;
+
+  @JsonProperty("@context")
+  protected String context;    // Todo :  make JsonldContext
+
   
   @NotNull protected String id;
   @NotNull protected String type;
@@ -35,7 +90,13 @@ public class Entity implements Serializable {
   protected Instant dateCreated;
   protected Instant dateModified;
   protected Map<String,String> extensions;
-  
+
+ 
+
+ public String getContext() {
+    return context;
+  }
+
   public String getId() {
     return id;
   }
@@ -58,23 +119,12 @@ public class Entity implements Serializable {
     return extensions;
   }
   
-  // Annotation
-  protected Person annotator;
-  protected DigitalResource annotated;
   
-  public Person getAnnotator() {
-    return annotator;
-  }
-  public DigitalResource getAnnotated() {
-    return annotated;
-  }
   
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((annotated == null) ? 0 : annotated.hashCode());
-    result = prime * result + ((annotator == null) ? 0 : annotator.hashCode());
     result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
     result = prime * result + ((dateModified == null) ? 0 : dateModified.hashCode());
     result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -93,16 +143,6 @@ public class Entity implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     Entity other = (Entity) obj;
-    if (annotated == null) {
-      if (other.annotated != null)
-        return false;
-    } else if (!annotated.equals(other.annotated))
-      return false;
-    if (annotator == null) {
-      if (other.annotator != null)
-        return false;
-    } else if (!annotator.equals(other.annotator))
-      return false;
     if (dateCreated == null) {
       if (other.dateCreated != null)
         return false;
@@ -147,8 +187,8 @@ public class Entity implements Serializable {
   }
 
   public static class Builder {
-    Entity _entity = new Entity();
-    
+    Entity _entity = new Entity(); 
+
     public Builder withId(String id) {
       _entity.id = id;
       return this;
@@ -156,6 +196,12 @@ public class Entity implements Serializable {
     
     public Builder withType(String type) {
       _entity.type = type;
+      return this;
+    }
+
+    @JsonProperty("@context")
+    public Builder withContext(String context) {
+      _entity.context = context;
       return this;
     }
     

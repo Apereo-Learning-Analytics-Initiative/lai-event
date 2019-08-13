@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
@@ -22,9 +23,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 public class Agent extends Entity {
 
   private static final long serialVersionUID = 1L;
-  
+
+   
   public static class Builder {
     Agent _agent = new Agent();
+
     
     public Builder withId(String id) {
       _agent.id = id;
@@ -33,6 +36,12 @@ public class Agent extends Entity {
     
     public Builder withType(String type) {
       _agent.type = type;
+      return this;
+    }
+
+    @JsonProperty("@context")
+    public Builder withContext(String context) {
+      _agent.context = context;
       return this;
     }
     
