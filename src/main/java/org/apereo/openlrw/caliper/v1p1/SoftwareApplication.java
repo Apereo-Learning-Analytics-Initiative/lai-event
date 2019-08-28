@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
@@ -31,6 +32,13 @@ public class SoftwareApplication extends Entity {
   
   public static class Builder {
     SoftwareApplication _softwareapplication = new SoftwareApplication();
+
+    @JsonProperty("@context")
+      public Builder withContext(String context) {
+        _softwareapplication.context = context;
+        return this;
+    }
+
     
     public Builder withId(String id) {
       _softwareapplication.id = id;

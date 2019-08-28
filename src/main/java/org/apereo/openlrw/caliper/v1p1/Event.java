@@ -7,10 +7,21 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonDeserialize(builder = Event.Builder.class)
 public class Event implements Caliper1p1Event {
 
   private static final long serialVersionUID = 1L;
   
+  @JsonProperty("@context")
+  private String context;   // Todo :  make JsonldContext
+ 
   private String id;
   private String type;
   private Agent actor;
@@ -26,6 +37,11 @@ public class Event implements Caliper1p1Event {
   private Session session;
   private LtiSession federatedSession;
   private Map<String, String> extensions;
+
+  public String getContext() {
+    return context;
+  }
+
   public String getId() {
     return id;
   }
@@ -187,6 +203,12 @@ public class Event implements Caliper1p1Event {
 
   public static class Builder {
     Event _basicEvent = new Event();
+
+    @JsonProperty("@context")
+    public Builder withContext(String context) {
+      _basicEvent.context = context;
+      return this;
+    }
     
     public Builder withId(String id) {
       _basicEvent.id = id;

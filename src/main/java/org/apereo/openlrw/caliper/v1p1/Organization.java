@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
@@ -59,6 +60,11 @@ public class Organization extends Agent {
       return this;
     }
     
+    @JsonProperty("@context")
+    public Builder withContext(String context) {
+      _organization.context = context;
+      return this;
+    }
     public Builder withType(String type) {
       _organization.type = type;
       return this;

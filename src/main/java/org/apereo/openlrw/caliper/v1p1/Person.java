@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
@@ -25,7 +26,13 @@ public class Person extends Agent {
   
   public static class Builder {
     Person _person = new Person();
-    
+   
+    @JsonProperty("@context")
+    public Builder withContext(String context) {
+      _person.context = context;
+      return this;
+    }
+
     public Builder withId(String id) {
       _person.id = id;
       return this;

@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
@@ -43,6 +44,12 @@ public class Membership extends Entity {
 
   public static class Builder {
     Membership _membership = new Membership();
+
+    @JsonProperty("@context")
+    public Builder withContext(String context) {
+      _membership.context = context;
+      return this;
+    }
     
     public Builder withId(String id) {
       _membership.id = id;
@@ -83,12 +90,14 @@ public class Membership extends Entity {
       _membership.organization = organization;
       return this;
     }
-    
+
+        
     public Builder withMember(Person member) {
       _membership.member = member;
       return this;
     }
-    
+
+        
     public Builder withRoles(List<String> roles) {
       _membership.roles = roles;
       return this;

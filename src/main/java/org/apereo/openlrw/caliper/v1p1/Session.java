@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
@@ -48,6 +49,12 @@ public class Session extends Entity {
   public static class Builder {
     Session _session = new Session();
     
+     @JsonProperty("@context")
+      public Builder withContext(String context) {
+        _session.context = context;
+        return this;
+    }
+
     public Builder withId(String id) {
       _session.id = id;
       return this;
